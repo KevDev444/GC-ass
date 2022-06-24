@@ -1,0 +1,131 @@
+<html>
+    <head>
+        <title>WHY GUITAR CENTER BLOWS!</title>
+        
+    </head>
+        <body style="background-color: rgba(141, 57, 8, 0.671);">
+            
+            <p style="color:rgb(245, 233, 166);">***HOW TO USE THE FUCK GUITAR CENTER APP*** --WELCOME-- Feel free to add to the list of reasons why Guitar Center sucks ballz using the text box provided & the "GET FUCKED" button!  --additionally closing or refreshing the browser will save your current work - you can delete any comment by clicking the 'Fuck Guitar Center' tab next to each respective comment!-- --Spam click the 'GET FUCKED!' button to Fuck Guitar Center down the entire page!!--</p>
+            
+            
+         
+        <input id="reasons-title" type="text" />
+        <input id="date-picker" type="date" />  
+        <button onclick="addReason()">GET FUCKED!</button>
+        8===D
+        
+        <div id="reasons-list"></div>
+        
+
+        <script>
+              //model section
+              //If local storage has a reasons array, then use it
+              //Otherwise use the default array
+            let reasons; 
+
+
+            //retrieve localSorage 
+            const savedReasons = JSON.parse(localStorage.getItem('reasons'));
+            //check if it's an array
+            if (Array.isArray(savedReasons)) {
+              reasons = savedReasons;   
+            } else { 
+              reasons = [{
+                title: 'The company lies to you!',
+                dueDate: '02-04-2023',
+                id: 'id1'
+            }, {
+                title: 'Every corporate douchebag is bald, and therefore looks like a walking penis!',
+                dueDate: '06-09-2024',
+                id: 'id2'
+            }, {
+                title: 'Employees are more of a threat than the drug-abusing-fentanyl-wastoids that steal from the store and resell to the aforementioned - because the people that run GC are really that stupid!',
+                dueDate: '01-01-2025',
+                id: 'id3'
+            }];
+            } 
+
+            
+                
+                //code that creates a reason
+                function createReason(title,dueDate) {
+                  const id = '' + new Date().getTime();
+
+                  reasons.push({
+                    title: title,
+                    dueDate: dueDate, 
+                    id: id
+                  });
+                  saveReasons();
+                }
+                //code that deletes a reason
+                function removeReason(idToDelete) {
+
+                  reasons = reasons.filter(function(reason) {
+
+                  if (reason.id === idToDelete) {
+                      return false;
+                  }   else {
+                      return true;
+                  }
+
+                  });
+
+                  saveReasons();
+                }
+            render();
+
+            function saveReasons() {
+              localStorage.setItem('reasons',JSON.stringify(reasons))
+            
+
+            }    
+            //controller section
+            function addReason() {
+              const textbox = document.getElementById('reasons-title');
+              const title = textbox.value;
+
+              const datePicker = document.getElementById('date-picker');
+              const dueDate = datePicker.value;  
+
+              createReason(title,dueDate);
+
+            render();
+
+            }       
+
+            function deleteReason(event) {
+              const deleteButton = event.target;
+              const idToDelete = deleteButton.id;  
+
+               
+              removeReason(idToDelete);
+              render();
+
+            }
+            //view section
+            function render() {
+            // reset list
+            document.getElementById('reasons-list').innerHTML = '';
+
+              reasons.forEach(function (reason) {
+                const element = document.createElement('div');
+                element.innerText = reason.title + ' ' + reason.dueDate;
+
+                const deleteButton = document.createElement('button');
+                deleteButton.innerText = 'Fuck Guitar Center!';
+                deleteButton.style='margin-left: 14px; background-color: yellow;';
+                deleteButton.onclick = deleteReason
+                deleteButton.id = reason.id
+                element.appendChild(deleteButton);
+
+                const reasonsList = document.getElementById('reasons-list');
+                reasonsList.appendChild(element);  
+            });
+
+            
+
+            }
+          </script>  
+        </body>
+</html>
